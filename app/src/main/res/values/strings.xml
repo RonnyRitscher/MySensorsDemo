@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">My SensorsDemo</string>
 
-    <string name="template">%1$s (Hersteller: %2$s, Version: %3$d, dynamisch: %4$s)\n</string>
+    <string name="template">%1$s \n(\tHersteller: %2$s, \tVersion: %3$d, \tdynamisch: %4$s)\n\n</string>
 
 
 
