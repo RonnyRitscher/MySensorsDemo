@@ -12,6 +12,8 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private SensorEventListener listener;
     private SensorEventListener2 listener2;
     boolean isDynamic;
+    private float light;
+    private ScrollView sv_main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         //initialisieren der Member:
         tv_main = findViewById(R.id.tv_main);
+        sv_main = findViewById(R.id.sv_main);
     }
 
     //------------------------------------
@@ -79,18 +84,21 @@ public class MainActivity extends AppCompatActivity {
                 public void onSensorChanged(SensorEvent event) {        //wenn sich im sensor selbst Werte ändern (zB: das Licht wird heller)
                     //values beinhaltet die Änderungen:
                     if(event.values.length>0){
+//                        int i=1;
+//                        for(float f : event.values){
+//                            //Werte in dem Logcat ausgeben:
+//                            /*0.Wert: Lux / Lichteinfall ... 1.Wert: Celvin / Farbtemparatur ...2.Wert:*/
+//                            Log.d(TAG, "onSensorChanged: " +i+ ": " + f);
+//                            i++;
+//                        }
+                        //Veränderungen in dem TextView ausgeben:
+                        light = event.values[0];
+                        Log.d(TAG, "onSensorChanged: Event-Value(Lux): " + light);
+                        tv_main.append(Float.toString(light) + "\n");
 
-                        int i=1;
-                        for(float f : event.values){
-                            Log.d(TAG, "onSensorChanged: " +i+ ": " + f);
-                            i++;
-                            /*
-                            1.Wert: Lux / Lichteinfall
-                            2.Wert: Celvin / Farbtemparatur
-                            3.Wert:
-                             */
-                        }
 
+                        //scrollview immer bis nach unten scollen lassen:
+                        sv_main.fullScroll(View.FOCUS_DOWN);
 
                     }
                 }
@@ -101,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
             //registrieren des Listeners:  *in der onPause wieder unregistrieren
+            Log.d(TAG, "onPause: Listener wurde angemeldet/registriert");
             manager.registerListener(listener , sensor, SensorManager.SENSOR_DELAY_NORMAL); //
 
 
@@ -112,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        Log.d(TAG, "onPause: Listener wurde abgemeldet/unregistriert");
         manager.unregisterListener(listener); //Listener unregistrieren
     }
 }
