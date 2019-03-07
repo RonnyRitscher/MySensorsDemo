@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.proneucon.mysensorsdemo">
 
+    <!-- HARDWARE-EINSCHRÄNKUNGEN-ANGEBEN: Für Google PlayStore sollten die Features angegeben werden: -->
+    <uses-feature android:name="android.hardware.sensor.light"/>
+    <uses-feature android:name="android.hardware.sensor.proximity"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

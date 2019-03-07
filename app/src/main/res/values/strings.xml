@@ -2,6 +2,7 @@
     <string name="app_name">My SensorsDemo</string>
 
     <string name="template">%1$s \n(\tHersteller: %2$s, \tVersion: %3$d, \tdynamisch: %4$s)\n\n</string>
+    <string name="template2">%1$s \n(\tHersteller: %2$s, \tVersion: %3$d, ReportingMode: %4$d ,\tdynamisch: %5$s)\n\n</string>
 
 
 
