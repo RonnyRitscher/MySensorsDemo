@@ -44,23 +44,26 @@ public class MainActivity extends AppCompatActivity {
         //Liste der Sensoren erstellen:
         List<Sensor> sensorList = manager.getSensorList(Sensor.TYPE_ALL); // beschafft alle Sensoren
         //anzeigen der Liste lassen:
-        for(Sensor sensor : sensorList){
+        for (Sensor sensor : sensorList) {
+
             isDynamic = false; //explizit auf false
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 isDynamic = sensor.isDynamicSensor(); // Dynamische Sensoren sind aufsetzbare/externe Sensoren(zB:Wettersensor)
-
-                //wenn sensor vorhanden, dann infos übergeben:
-                tv_main.append(getString(R.string.template,
-                        sensor.getName(),
-                        sensor.getVendor(),
-                        sensor.getVersion(),
-                        Boolean.toString(isDynamic)
-                ));
-                
             }
+            //wenn sensor vorhanden, dann infos übergeben:
+            tv_main.append(getString(R.string.template,
+                    sensor.getName(),
+                    sensor.getVendor(),
+                    sensor.getVersion(),
+                    Boolean.toString(isDynamic)
+            ));
+
+
         }
 
     }
+
     //------------------------------------
     // oP - um manager zu melden
     @Override
